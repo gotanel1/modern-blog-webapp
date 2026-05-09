@@ -11,8 +11,14 @@ async function bootstrap() {
     crossOriginResourcePolicy: { policy: "cross-origin" },
   }));
   
+  const allowedOrigins = [
+    'http://localhost:3001',
+    'https://modern-blog-webapp.vercel.app',
+    process.env.FRONTEND_URL,
+  ].filter(Boolean) as string[];
+
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3001',
+    origin: allowedOrigins,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
